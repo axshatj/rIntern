@@ -1,8 +1,11 @@
 from serpapi import GoogleSearch
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
+serpapi_api_key = os.environ.get("SERPAPI_API_KEY")
 class SerpApiExtractor:
     def __init__(self, api_key):
-        self.api_key = api_key
+        self.api_key = serpapi_api_key
 
     def extract_content(self, query):
         content = ""
