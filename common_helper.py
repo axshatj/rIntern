@@ -1,4 +1,8 @@
 import openai
+from dotenv import load_dotenv
+import os
+load_dotenv()
+openai_api_key = os.environ.get("OPENAI_API_KEY")
 
 def create_embedding(text):
     embedding_model = 'text-embedding-3-large'
