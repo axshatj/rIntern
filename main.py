@@ -4,7 +4,8 @@ from serpapi import GoogleSearch
 from dotenv import load_dotenv
 from Indexer import Indexer
 from pymilvus import MilvusClient
-
+from search import SearchEngine
+from common_helper import create_embedding
 load_dotenv()
 serpapi_api_key = os.environ.get("SERPAPI_API_KEY")
 openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -18,11 +19,25 @@ milvus_client = MilvusClient(
 )
 
 # connect to milvus
-indexer = Indexer(milvus_client, milvus_collection_name)
+
+# indexer = Indexer(milvus_client, milvus_collection_name)
+
+
 
 # get text from pdf and insert at the same time just comment out the insert portion
-indexer.get_pdf_content(bucket_name, folder_prefix)
 
-# get scraped text from internet and insert at the same time just comment out the insert portion
-indexer.get_internet_content(serpapi_api_key, "solar eclipse")
+# indexer.get_pdf_content(bucket_name, folder_prefix)
 
+
+
+
+# insert knowledge base in the database
+
+# indexer.text_to_vectordb("knowledge base")
+
+
+
+# search over the embeddings and internet
+
+# searchengine = SearchEngine(milvus_client, milvus_collection_name, serpapi_api_key)
+# print(searchengine.search("write the code to find prime numbers from 1 to n in python"))

@@ -22,14 +22,17 @@ class Indexer:
         file_list = extractor.list_pdf_files()
         for pdf_file in file_list:
             pdf_text = extractor.extract_text_from_pdf(pdf_file)
-            # print(pdf_text)
+
+            # un-comment this part to insert in the database
             # self.text_to_vectordb(pdf_text) 
 
     def get_internet_content(self, serpapi_api_key, Query):
         extractor = SerpApiExtractor(serpapi_api_key)
         query = Query
         internet_text = extractor.extract_content(query)
-        # print(internet_text)
+        print(internet_text)
+
+        # un-comment this part to insert in the database
         # self.text_to_vectordb(internet_text) 
 
     def text_to_vectordb(self, content):
@@ -40,10 +43,13 @@ class Indexer:
         docs = text_splitter.create_documents([content])
         for doc in docs:
             embedding = create_embedding(doc.page_content)
-            # self.insert_embedding(embedding)
+
+            # un-comment this part to insert in the database
+            self.insert_embedding(embedding,doc.page_content)
   
-    def insert_embedding(self, embedding):
+    def insert_embedding(self, embedding, text):
         row = {
-            'vector': embedding
+            'vector': embedding,
+            'text': text
         }
         self.milvus_client.insert(self.milvus_collection_name, data=[row])

@@ -14,10 +14,9 @@ class SerpApiExtractor:
         search = GoogleSearch(params)
         results = search.get_dict()
         if 'organic_results' in results:
-            for result in results['organic_results']:
-                title = result.get('title')
-                snippet = result.get('snippet')
-                link = result.get('link')
-                content += f"Title: {title}\nSnippet: {snippet}\nLink: {link}\n\n"
+            for org_result in results['organic_results']:
+                if 'snippet' in org_result:
+                    snippet = org_result.get('snippet')
+                    content += f"Snippet: {snippet}\n\n"
+                    
         return content
-

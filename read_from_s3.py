@@ -12,22 +12,17 @@ class S3PDFExtractor:
     def extract_text_from_pdf(self, pdf_file):
         s3_client = boto3.client('s3')
         response = s3_client.get_object(Bucket=self.bucket_name, Key=pdf_file)
-
         pdf_data = response['Body'].read()
-
         pdf_reader = PdfReader(BytesIO(pdf_data))
-
         text = ''
         for page in pdf_reader.pages:
             text += page.extract_text()
         return text
 
-
     def list_pdf_files(self):
         s3_client = boto3.client('s3')
         try:
             response = s3_client.list_objects_v2(Bucket=self.bucket_name)
-
             pdf_files = []
             for obj in response['Contents']:
                 key = obj['Key']
