@@ -53,7 +53,7 @@ class SearchEngine:
         system_message = {"role": "system", "content": system_content}
         user_message = {"role": "user", "content": user_content}
         
-        chatgpt_response = openai.ChatCompletion.create(model="gpt-4-turbo-preview", messages=[system_message, user_message])
+        chatgpt_response = openai.ChatCompletion.create(model="gpt-4-turbo-2024-04-09", messages=[system_message, user_message])
         return chatgpt_response.choices[0].message.content
   
     def search(self, user_query):

@@ -19,7 +19,6 @@ milvus_client = MilvusClient(
 )
 
 # connect to milvus
-
 # indexer = Indexer(milvus_client, milvus_collection_name)
 
 
@@ -40,4 +39,4 @@ milvus_client = MilvusClient(
 # search over the embeddings and internet
 
 # searchengine = SearchEngine(milvus_client, milvus_collection_name, serpapi_api_key)
-# print(searchengine.search("write the code to find prime numbers from 1 to n in python"))
+# print(searchengine.search("who is the founder of google))
