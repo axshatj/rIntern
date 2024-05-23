@@ -1,4 +1,4 @@
-import boto3
+# import boto3
 import openai
 import textract
 from read_from_s3 import S3PDFExtractor
@@ -46,10 +46,32 @@ class Indexer:
 
             # un-comment this part to insert in the database
             self.insert_embedding(embedding,doc.page_content)
+            print(doc.page_content,embedding)
   
     def insert_embedding(self, embedding, text):
-        row = {
-            'vector': embedding,
-            'text': text
-        }
-        self.milvus_client.insert(self.milvus_collection_name, data=[row])
+        try:
+            row = {
+                'vector': embedding,
+                'text': text
+            }
+            self.milvus_client.insert(self.milvus_collection_name, data=[row])
+            # print("insert",text)
+            
+        except Exception as e:
+            print(f"Failed to insert embedding: {e}")
+            
+
+# if __name__ == "__main__":
+#     # Load environment variables
+#     load_dotenv()
+#     milvus_collection_name = os.environ.get("MILVUS_COLLECTION_NAME")
+
+#     milvus_client = MilvusClient(
+#         uri=os.getenv("MILVUS_ENDPOINT"),
+#         token=os.getenv("MILVUS_API_KEY")
+#     )
+#     indexer = Indexer(milvus_client, milvus_collection_name)
+
+#     # Example content to index
+#     text="hi"
+#     indexer.text_to_vectordb(text)

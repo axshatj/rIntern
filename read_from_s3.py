@@ -1,4 +1,4 @@
-import boto3
+# import boto3
 from PyPDF2 import PdfReader
 from io import BytesIO
 import textract
@@ -7,10 +7,10 @@ class S3PDFExtractor:
     def __init__(self, bucket_name, folder_prefix=''):
         self.bucket_name = bucket_name
         self.folder_prefix = folder_prefix
-        client = boto3.client('s3')
+        # client = boto3.client('s3')
 
     def extract_text_from_pdf(self, pdf_file):
-        s3_client = boto3.client('s3')
+        # s3_client = boto3.client('s3')
         response = s3_client.get_object(Bucket=self.bucket_name, Key=pdf_file)
         pdf_data = response['Body'].read()
         pdf_reader = PdfReader(BytesIO(pdf_data))
