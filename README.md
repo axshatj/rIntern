@@ -4,7 +4,7 @@ It takes images of medical reports as input like CT-SCAN, Blood report, RT-PCR r
 supporting your medical condition. On the basis of the information provided the app provides diagnosis and remedy of the disease  </br>
 analyzing its knowledge base.
 
-#Set-up
+# Set-up
 -> Install requirements.txt </br>
 -> Setup OPENAI, SERPER, MILVUS API_KEYS </br>
 -> Setup milvus collection name
